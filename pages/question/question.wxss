@@ -26,6 +26,17 @@ page{
   border-radius: 30rpx;
   border: solid white 8rpx;
   margin: 30rpx;
+  text-align: left;
+  font-size: 24rpx;
+}
+
+.option-selected {
+  min-width: 500rpx;
+  border-radius: 30rpx;
+  border: solid #e4ae1a 8rpx;
+  margin: 30rpx;
+  text-align: left;
+  font-size: 24rpx;
 }
 
 
@@ -35,13 +46,11 @@ page{
   height: 48rpx;
 }
 .favorate{
-  position: fixed;
+  position: relative;
   border-radius: 50rpx;
-  bottom: 110rpx;
-  right: 10rpx;
-  width: 100rpx;
-  height: 100rpx;
+  
   background-color: whitesmoke;
+  background-repeat: false;
 }
 
 .footer{

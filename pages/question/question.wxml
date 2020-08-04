@@ -1,20 +1,24 @@
 <view class="container">
-  <view class="title">第{{question.no}}题</view>
-  <view class="question">{{question.stem}}</view>
+  <view class="title">第{{question.id}}题</view>
+  <view class="question">{{question.detail}}
+    <view style="color:#e4ae1a">{{question.answer.length>1?"(Select "+question.answer.length+")":"" }}</view>
+  </view>
   <view wx:if="{{question.img}}">
   <image src="{{question.img}}" mode="aspectFit"></image>
   </view>
   <view class="options">
-    <view wx:key="option" wx:for="{{question.options}}">
-      <button animation="{{wrongid==item.option? animationData:''}}" type="{{correctid==item.option?'primary':''}}" class="option" bindtap='selectAnswer' data-id="{{item.option}}" disabled='{{disable}}'>{{item.option}}. {{item.content}}</button>
+    <view wx:key="option" wx:for-index="idx" wx:for="{{question.choices}}">
+      <button animation="{{wrongid==item.option? animationData:''}}" type="{{correctid==item.option?'primary':''}}" class='{{selectedOptions[idx]>0?"option-selected":"option" }}'  data-num="{{idx}}" bindtap='selectOption' data-id="{{item}}" disabled='{{disable}}'>{{item}}</button>
     </view>
+    <button id="btnExplain" class="btn" bindtap='btnExplain' loading="{{pending}}">查看解析</button>
   </view>
-   <view class="favorate" bindtap="addFavorite">
-    <view wx:if="{{favorite}}"><image class="icon" src="../../resource/icon/heart.png"></image></view>
-    <view wx:else><image class="icon" src="../../resource/icon/heart_none.png"></image></view>
-  </view> 
+
   <view class="footer">
     <button id="btnPrevious" class="btn" bindtap='previousQuestion'>上一题</button>
+    <view class="favorate" bindtap="addFavorite">
+      <view wx:if="{{favorite}}"><image class="icon" src="../../resource/icon/heart.png"></image></view>
+      <view wx:else><image class="icon" src="../../resource/icon/heart_none.png"></image></view>
+    </view>
     <button id="btnNext" class="btn" bindtap='nextQuestion' loading="{{pending}}">下一题</button>
   </view>
 </view>

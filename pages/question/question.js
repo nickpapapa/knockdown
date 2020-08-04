@@ -71,9 +71,6 @@ Page({
       questioncontrol.view_list = self.generateList(t, questioncontrol.getQuestionCount())
       self.nextQuestion()
     }
-
-
-
   },
   generateList: function(t, count){
     var list = [];
@@ -111,6 +108,7 @@ previousQuestion: function () {
   this.setNewQuestion(question, favorite)
 },
 setNewQuestion: function(question, favorite){
+  let selectOpt=new Array(question.choices.length)
   this.setData({
     question: question,
     answer: question.answer,
@@ -118,7 +116,19 @@ setNewQuestion: function(question, favorite){
     correctid: '',
     wrongid: '',
     disable: '',
-    pending: false
+    pending: false,
+    selectedOptions: selectOpt
+  })
+},
+selectOption:function(evt){
+  var itemId = evt.currentTarget.dataset.num
+  if(this.data.selectedOptions[itemId]){
+    this.data.selectedOptions[itemId]=undefined
+  }else{
+    this.data.selectedOptions[itemId]=1
+  }
+  this.setData({
+    selectedOptions: this.data.selectedOptions
   })
 },
 selectAnswer: function(evt){
@@ -138,7 +148,15 @@ selectAnswer: function(evt){
   else{
     this.setData({wrongid: selected})
   }
-},  
+},
+btnExplain:function(){
+  let explanation=this.data.question.explanation.join('\n')
+  wx.showModal({
+    content: explanation,
+    showCancel:false
+  })
+  return
+},
 addFavorite: function(){
   let isFavorite = questioncontrol.toggleFavorite()
   this.setData({ favorite: isFavorite})

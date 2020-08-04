@@ -1,4 +1,4 @@
-let questions = [
+[
   {
     "answer": [
       "B"
@@ -9,7 +9,7 @@ let questions = [
       "B.Decommissioning of storage devices using industry-standard practices",
       "C.Background virus scans of EBS volumes and EBS snapshots",
       "D.Replication of data across multiple AWS Regions",
-      "E.Secure wiping of EBS data when an EBS volume is un-mounted"
+      "E.Secure wiping of EBS data when an EBS volume is un-mounted "
     ],
     "detail": "Which is an operational process performed by AWS for data security?",
     "explanation": [
@@ -14882,4 +14882,3 @@ let questions = [
     "type": "Multiple Choice"
   }
 ]
-module.exports = questions
