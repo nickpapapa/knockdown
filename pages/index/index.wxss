@@ -37,3 +37,8 @@
   font-size: 48rpx;
   text-align: center;
 }
+
+.head-p{
+  text-align: center;
+  color:#F16622;
+}

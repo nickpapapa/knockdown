@@ -9,9 +9,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    questions: qs.questions
+    questions: questioncontrol.questions,
+    favorite_list: questioncontrol.favorite_list,
+    wrong_list: questioncontrol.favorite_list,
+    showModal:false,
+    scrollTop:0,
+    layerlayer: {
+      isLayerShow: false,//默认弹窗
+      layerAnimation: {},//弹窗动画
+    },
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -72,6 +79,22 @@ Page({
       self.nextQuestion()
     }
   },
+  pageClick: function () {
+    let layerAnimation = wx.createAnimation({
+      transformOrigin: '50% 50%',
+      duration: 500,
+      timingFunction: 'ease',
+      delay: 0
+    })
+    if (!this.data.layerlayer.isLayerShow) {
+      layerAnimation.translate3d(0, 0, 0).step()
+    } else {
+      layerAnimation.translate3d(0, '100%', 0).step()
+    }
+    this.data.layerlayer.isLayerShow = !this.data.layerlayer.isLayerShow
+    this.data.layerlayer.layerAnimation = layerAnimation
+    this.setData(this.data)
+  },
   generateList: function(t, count){
     var list = [];
     for (var i = 0; i < count; i++) {
@@ -107,8 +130,15 @@ previousQuestion: function () {
   let favorite = questioncontrol.isFavorite()
   this.setNewQuestion(question, favorite)
 },
+specificQuestion: function (evt) {
+  let vid=evt.currentTarget.dataset.option-1
+  let question = questioncontrol.getSpecificQuestion(vid)
+  let favorite = questioncontrol.isFavorite()
+  this.setNewQuestion(question, favorite)
+},
 setNewQuestion: function(question, favorite){
   let selectOpt=new Array(question.choices.length)
+  let explanation=question.explanation.join('\n')
   this.setData({
     question: question,
     answer: question.answer,
@@ -117,7 +147,8 @@ setNewQuestion: function(question, favorite){
     wrongid: '',
     disable: '',
     pending: false,
-    selectedOptions: selectOpt
+    selectedOptions: selectOpt,
+    explanation: explanation
   })
 },
 selectOption:function(evt){
@@ -151,16 +182,11 @@ selectAnswer: function(evt){
 },
 btnExplain:function(){
   let explanation=this.data.question.explanation.join('\n')
-  wx.showModal({
-    content: explanation,
-    showCancel:false
-  })
-  return
+  this.setData({showModal:true})
 },
 addFavorite: function(){
   let isFavorite = questioncontrol.toggleFavorite()
   this.setData({ favorite: isFavorite})
-
 },
   /**
    * 生命周期函数--监听页面初次渲染完成

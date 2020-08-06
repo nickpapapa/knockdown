@@ -5,6 +5,7 @@ var questionControl = {
   favorite_list: new Set(),
   wrong_list: new Set(),
   view_list: [],
+  answered_list:[],
   vid: 0,
   getNextQuestion: function(step=1) {
     this.vid+=step
@@ -15,6 +16,11 @@ var questionControl = {
   getPreviousQuestion: function(step=1) {
     this.vid -= step
     this.vid = Math.max(this.vid, 0)
+    let qid = this.view_list[this.vid]
+    return this.questions[qid]
+  },
+  getSpecificQuestion: function(vid) {
+    this.vid = Math.min(vid, this.view_list.length-1)
     let qid = this.view_list[this.vid]
     return this.questions[qid]
   },
@@ -59,8 +65,6 @@ var questionControl = {
   }
 
 };
-
-
 
 module.exports = {
   questionControl: questionControl

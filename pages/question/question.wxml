@@ -10,15 +10,31 @@
     <view wx:key="option" wx:for-index="idx" wx:for="{{question.choices}}">
       <button animation="{{wrongid==item.option? animationData:''}}" type="{{correctid==item.option?'primary':''}}" class='{{selectedOptions[idx]>0?"option-selected":"option" }}'  data-num="{{idx}}" bindtap='selectOption' data-id="{{item}}" disabled='{{disable}}'>{{item}}</button>
     </view>
-    <button id="btnExplain" class="btn" bindtap='btnExplain' loading="{{pending}}">查看解析</button>
+    <modal show="{{showModal}}" height='60%' catchtouchmove="move" bindcancel="modalCancel" bindconfirm='modalConfirm'>
+      <view class='modal-content'>
+        <view wx:key="*this" wx:for="{{question.explanation}}">
+          <p class="paragraph">{{item}}</p>
+        </view>
+      </view>
+    </modal>
+    <button id="btnExplain" class="btn" bindtap='btnExplain' loading="{{pending}}">查看解析</button>    
+  </view>
+
+  <view class="question-list">
+    <scroll-view class="status-lists" scroll-y="true">
+      <block wx:for="{{questions}}">
+        <view bindtap="specificQuestion" data-option="{{item.id}}"  class="status-list">{{item.id}}</view>
+      </block>
+    </scroll-view>
   </view>
 
   <view class="footer">
-    <button id="btnPrevious" class="btn" bindtap='previousQuestion'>上一题</button>
     <view class="favorate" bindtap="addFavorite">
       <view wx:if="{{favorite}}"><image class="icon" src="../../resource/icon/heart.png"></image></view>
       <view wx:else><image class="icon" src="../../resource/icon/heart_none.png"></image></view>
     </view>
+    <view id="directory" class="page" bindtap='pageClick'>test</view>
+    <button id="btnPrevious" class="btn" bindtap='previousQuestion'>上一题</button>
     <button id="btnNext" class="btn" bindtap='nextQuestion' loading="{{pending}}">下一题</button>
   </view>
 </view>

@@ -19,8 +19,13 @@ page{
 .question{
   color: antiquewhite;
   margin: 40rpx 20rpx;
+  font-size: 30rpx;
+  line-height: 45rpx;
 }
 
+.options {
+  margin-bottom: 150rpx;
+}
 .option {
   min-width: 500rpx;
   border-radius: 30rpx;
@@ -81,6 +86,37 @@ page{
 /* 去除button的边框 */
 .btn::after{
   border: none;
+}
+
+.page {
+  height: 30rpx;
+  padding: 0 0 0 37rpx;
+  font-size: 24rpx;
+  color: #999;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAACR0lEQVRIx+3Wz4tXVRjH8dd3nEaQqU2TuBBcFNhoUpQrXYgJ2kKNsf4FeQjbKWH9AyrkRnTxoLhzp04guHAx0WaEwJXjTMIUEbYo3ZRSZMzY4p6J6+XOna/f79YPHO759Zz3eZ5z73NPLzNfx0UcxjrdWsSxiLjVNpiZ23AWW3ATX0XE0/qckQKb6gMGb2E6Mze3wHbgO3yESRzH1cwcq88bxcelvjsiZlcjZeY4vsVO7MflBmwGE/ge54ojhwr00xVPR0qB+S7XIuIJ7pXmax2w/RFxBQfxdw06pgYbSKvA/igbnGmDDgzMzA241QarRaUJPTOMh+9iEx61wRrQKM0DwwB/wbPi4WcdkXgDX5TmTwMDI+LX2kKnMvPkKrAZvFMicWKolyYivsaXbdAW2IcR8cNozX6sD8ar5flvDXo6M+FUgfZwqQV2F3qZuYC3MYcfO2DrVR/8CHZFxO1G+E4WKDzBeBO2AtyDG7Xdr6ULEfF520BmHscZVZr8GYfrMOjV4r0XGzpAzzAXEXe6dpOZE9iM+Wbipsqlz8FfVJn5geqsmvbvlbOl+vBnIuLhUCHNzPM41qfdYxzqZea86nfyQi9N6ZvFsirF/dNh+2aJwsJogcG+iPh9jfBdwxG8X+v+JiI+WcNuI37DZP0Mn1pbj8vzlZa+Lv2/9lCZZhC9BL4EDgRcLvVtXRPLNXF7af5ZCmwvY11aWXu5l5nXVRfhfvUXtpb6fd0Jv6npERzFNJb6MFjEVEQ8iIgHZaOLfdgt4TqO/gcxI9vl1CCs3AAAAABJRU5ErkJggg==") no-repeat left center/28rpx 28rpx;
+  line-height: 36rpx;
+}
+
+.status-lists {
+  max-height: 500rpx;
+  padding: 0 0 24rpx;
+  border-top: 1rpx solid #eaeaea;
+  background: #fff;
+  z-index: 100;
+  overflow: auto;
+}
+
+.status-lists .status-list {
+  float: left;
+  width: 98rpx;
+  height: 98rpx;
+  margin: 24rpx 0 0 20rpx;
+  border-radius: 50rpx;
+  border: 1rpx solid #ccc;
+  font-size: 20rpx;
+  line-height: 98rpx;
+  text-align: center;
+  color: #ccc;
 }
 
 
