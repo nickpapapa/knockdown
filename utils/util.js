@@ -13,7 +13,17 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+const convertToAnswer = selectOps => {
+  const az = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  let answerArray = []
+  for (var i = 0; i < selectOps.length; i++) {
+    if (!!selectOps[i])
+      answerArray = answerArray.concat(az[i])
+  }
+  return answerArray
+}
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  convertToAnswer: convertToAnswer
 }

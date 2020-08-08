@@ -4,11 +4,13 @@
     <view style="color:#e4ae1a">{{question.answer.length>1?"(Select "+question.answer.length+")":"" }}</view>
   </view>
   <view wx:if="{{question.img}}">
-  <image src="{{question.img}}" mode="aspectFit"></image>
+    <image src="{{question.img}}" mode="aspectFit"></image>
   </view>
   <view class="options">
     <view wx:key="option" wx:for-index="idx" wx:for="{{question.choices}}">
-      <button animation="{{wrongid==item.option? animationData:''}}" type="{{correctid==item.option?'primary':''}}" class='{{selectedOptions[idx]>0?"option-selected":"option" }}'  data-num="{{idx}}" bindtap='selectOption' data-id="{{item}}" disabled='{{disable}}'>{{item}}</button>
+      <button animation="{{wrongid==item.option? animationData:''}}" type="{{correctid==item.option?'primary':''}}"
+        class='{{questions[question.id-1].selectOpt[idx]>0?"option-selected":"option" }}' data-num="{{idx}}"
+        bindtap='selectOption' data-id="{{item}}" disabled='{{disable}}'>{{item}}</button>
     </view>
     <modal show="{{showModal}}" height='60%' catchtouchmove="move" bindcancel="modalCancel" bindconfirm='modalConfirm'>
       <view class='modal-content'>
@@ -17,23 +19,38 @@
         </view>
       </view>
     </modal>
-    <button id="btnExplain" class="btn" bindtap='btnExplain' loading="{{pending}}">查看解析</button>    
+    <button id="btnExplain" class="btn" bindtap='btnExplain' loading="{{pending}}">查看解析</button>
   </view>
 
-  <view class="question-list">
+  <view class="question-list" wx:if="{{showQuestionList}}">
     <scroll-view class="status-lists" scroll-y="true">
+      <button id="btnExplain">答题情况</button>
+      <view>{{questions.length}}题 正确:{{right_list.length}} 错误:{{wronged_list.length}}
+        未答:{{questions.length-answered_list.length}}</view>
       <block wx:for="{{questions}}">
-        <view bindtap="specificQuestion" data-option="{{item.id}}"  class="status-list">{{item.id}}</view>
+        <view bindtap="specificQuestion" data-option="{{item.id}}"
+          class="status-list {{item.answered?(item.correct?'correct-option':'wrong-option'):''}}">{{item.id}}</view>
       </block>
     </scroll-view>
   </view>
 
   <view class="footer">
-    <view class="favorate" bindtap="addFavorite">
-      <view wx:if="{{favorite}}"><image class="icon" src="../../resource/icon/heart.png"></image></view>
-      <view wx:else><image class="icon" src="../../resource/icon/heart_none.png"></image></view>
+    <view bindtap="addFavorite">
+      <view wx:if="{{favorite}}">
+        <image class="icon" src="../../resource/icon/favorite_on.png"></image>
+      </view>
+      <view wx:else>
+        <image class="icon" src="../../resource/icon/favorite_off.png"></image>
+      </view>
     </view>
-    <view id="directory" class="page" bindtap='pageClick'>test</view>
+    <view id="directory" bindtap='toggleList'>
+      <view wx:if="{{showQuestionList}}">
+        <image class="icon" src="../../resource/icon/openedbook.png"></image>
+      </view>
+      <view wx:else>
+        <image class="icon" src="../../resource/icon/book.png"></image>
+      </view>
+    </view>
     <button id="btnPrevious" class="btn" bindtap='previousQuestion'>上一题</button>
     <button id="btnNext" class="btn" bindtap='nextQuestion' loading="{{pending}}">下一题</button>
   </view>

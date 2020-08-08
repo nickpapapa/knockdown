@@ -1,8 +1,6 @@
 <!--index.wxml-->
 <view class="container">
   <view class="userinfo">
-    <view class='head-p'>不出意外的话</view>
-    <view class='head-p'>你可以在这里找到4-5题考试真题</view>
     <button bindtap="bindSequence" class='type-btn'> SAA-C02真题模拟 </button>
     <button bindtap="bindRandom" class='type-btn'> 乱序学习 </button>
     <button bindtap="bindFavorite" class='type-btn'> 我的收藏 </button>
